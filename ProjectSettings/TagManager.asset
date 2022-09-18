@@ -8,6 +8,7 @@ TagManager:
   - Cube
   - Tail
   - Bonus
+  - Eating
   layers:
   - Default
   - TransparentFX

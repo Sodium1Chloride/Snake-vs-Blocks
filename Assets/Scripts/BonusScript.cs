@@ -1,12 +1,17 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class BonusScript : MonoBehaviour
 {
     public TextMeshPro Text;
+    public AudioSource Audio;
+    public Transform[] Items;
+    public Collider Collider;
+    public ParticleSystem Particles;
 
     private int _bonus;
-    // Start is called before the first frame update
+
     void Start()
     {
         _bonus = Random.Range(1, 5);
@@ -20,6 +25,15 @@ public class BonusScript : MonoBehaviour
             return;
         }
         player.AddLength(_bonus);
-        Destroy(transform.gameObject);
+        foreach (Transform a in Items)
+        {
+            a.transform.gameObject.SetActive(false);
+        }
+        Particles.transform.position = transform.position;
+        Particles.Play();
+        Collider.enabled = false;
+        Audio.Play();
+        Destroy(transform.gameObject, Particles.main.startLifetime.constant);
     }
+
 }
