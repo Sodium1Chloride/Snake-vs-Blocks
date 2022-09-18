@@ -14,7 +14,6 @@ public class PlayerVariables : MonoBehaviour
     public LevelMaster LevelMaster;
     public TextMeshPro LengthText;
 
-    private List<Material> _material = new();
     private GameObject _previousPiece;
     private GameObject _currentPiece;
     private void Start()
@@ -34,9 +33,7 @@ public class PlayerVariables : MonoBehaviour
             GameObject currentPiece = Instantiate(BodyPiece, transform);
             currentPiece.transform.position = _previousPiece.transform.position + new Vector3(0, 0, -2 * (i + 1));
             Renderer pieceRenderer = currentPiece.GetComponent<Renderer>();
-            pieceRenderer.GetMaterials(_material);
-            _material[0].SetFloat("_Position", 1f - ((float)CurrentLength / 10));
-            pieceRenderer.sharedMaterial = _material[0];
+            pieceRenderer.material.SetFloat("_Position", 1f - ((float)CurrentLength / 10));
             BodyScript bodyScript = currentPiece.GetComponent<BodyScript>();
             bodyScript.ObjectBefore = _previousPiece.transform;
             Body.Add(currentPiece);

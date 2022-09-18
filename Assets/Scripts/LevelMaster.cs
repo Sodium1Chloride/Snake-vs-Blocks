@@ -65,8 +65,9 @@ public class LevelMaster : MonoBehaviour
 
     public void SetLevelMovement(bool value)
     {
-        LevelMovement.enabled = value;
         Player.CanMove = value;
+        LevelMovement.enabled = value;
+        LevelMovement.Wait = !value;
     }
 
     public void ChangeMusic(string value)
